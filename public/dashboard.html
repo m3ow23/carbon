@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon</title>
+    <link rel="stylesheet" href="styles/dashboard.css" type="text/css">
+</head>
+<body>
+    <script src="scripts/dashboard.js" type="module"></script>
+    <main id="main">
+        <div class="title">
+            <p>C</p>
+            <p>a</p>
+            <p>r</p>
+            <p>b</p>
+            <p>o</p>
+            <p>n</p>
+        </div>
+        <div id="accountsContainer" class="accountsContainer"></div>
+        <div class="addAccountModalContainer" id="addAccountModalContainer">
+            <div class="accountModal">
+                <p class="label">Account Name:</p>
+                <input class="input" type="text" id="addAccountName" placeholder="enter account name">
+                <p class="label">Password:</p>
+                <input class="input" type="password" id="addPassword" placeholder="enter password">
+                <p class="label">Color:</p>
+                <input class="colorPicker" id="addColorPicker" type="color">
+                <div class="buttonsContainer">
+                    <button class="button" id="addCancelButton">Cancel</button>
+                    <button class="button" id="addButton">Add</button>
+                </div>
+            </div>
+            <div class="addAccountModalBackgroundBlur" id="addAccountModalBackgroundBlur"></div>
+        </div>
+        <div class="editAccountModalContainer" id="editAccountModalContainer">
+            <div class="editAccountModal accountModal">
+                <p class="accountUID" id="accountUID">Editing...</p>
+                <p class="label">Account Name:</p>
+                <input class="input" type="text" id="editAccountName" placeholder="enter new account name">
+                <p class="label">Password:</p>
+                <input class="input" type="password" id="editPassword" placeholder="enter new password">
+                <p class="label">Color:</p>
+                <input class="colorPicker" id="editColorPicker" type="color">
+                <div class="buttonsContainer">
+                    <button class="button deleteButton" id="deleteButton">Delete</button>
+                    <button class="button" id="editCancelButton">Cancel</button>
+                    <button class="button" id="saveButton">Save</button>
+                </div>
+            </div>
+            <div class="editAccountModalBackgroundBlur" id="editAccountModalBackgroundBlur"></div>
+        </div>
+        <div class="logoutContainer" id="logoutContainer">
+            <button id="logoutButton">Log out</button>
+        </div>
+    </main>
+</body>
+</html>

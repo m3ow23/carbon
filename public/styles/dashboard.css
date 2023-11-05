@@ -1,0 +1,215 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 95vh;
+}
+
+.title {
+    display: flex;
+}
+
+.title p {
+    color: white;
+    font-size: 5em;
+    margin-top: .5em;
+    margin-bottom: 1rem;
+    transition: color 0.2s;
+}
+
+.title p:hover {
+    color: orange;
+}
+
+
+/* Account Cards */
+
+.accountsContainer {
+    display: flex;
+    max-width: 80vw;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    font-size: 1em;
+    display: flex;
+    background-color: white;
+    width: 10em;
+    height: 10em;
+    margin: 1em;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    border-radius: .5em;
+}
+
+.card:hover {
+    background-color: orange;
+}
+
+
+/* Account Modal */
+
+.addAccountModalContainer {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.editAccountModalContainer {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.accountModal {
+    position: fixed;
+    height: 17em;
+    width: 20em;
+    background-color: black;
+    z-index: 2;
+    border-radius: .5em;
+    box-shadow: 0 0 10px white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1.5em;
+}
+
+.editAccountModal {
+    height: 20em;
+}
+
+.accountModal .accountUID {
+    font-size: 1.5em;
+    color: white;
+    margin-bottom: 1em;
+    text-align: center;
+    margin-top: 0;
+}
+
+.accountModal .label{
+    margin: 0;
+    margin-bottom: .25em;
+    color: white;
+}
+
+.accountModal .input {
+    margin-bottom: 1em;
+    font-size: 1em;
+    padding: .5em 1em;
+    margin-bottom: 1em;
+    border-radius: 25em;
+    transition: outline 0.2s;
+}
+
+.accountModal .input:focus {
+    outline: 2px solid orange;
+}
+
+.accountModal .input:hover {
+    outline: 2px solid orange;
+}
+
+.colorPicker {
+    height: 0;
+    width: 8.5em;
+    padding: 1.5em;
+    border-radius: 1.5em;
+    margin-bottom: 1em;
+    margin-bottom: 1em;
+    transition: outline 0.2s;
+    cursor: pointer;
+    margin-bottom: 1em;
+    outline: 2px solid white;
+}
+
+.colorPicker:hover {
+    outline: 2px solid orange;
+}
+
+.accountModal .buttonsContainer {
+    text-align: end;
+}
+
+.accountModal .button {
+    font-size: 1em;
+    width: 5em;
+    padding: .5em;
+    border-radius: 25em;
+    cursor: pointer;
+    border: 2px solid black;
+    background-color: white;
+    transition: background-color 0.2s;
+}
+
+.accountModal .button:hover {
+    background-color: orange;
+}
+
+.accountModal .deleteButton {
+    background-color: rgb(249, 77, 77);
+    margin-right: 4.3em;
+}
+
+.addAccountModalBackgroundBlur {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(30px); /* Adjust the blur intensity as needed */
+    background-color: rgb(0, 0, 0, .5);
+    z-index: 1;
+}
+
+.editAccountModalBackgroundBlur {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(30px); /* Adjust the blur intensity as needed */
+    background-color: rgb(0, 0, 0, .5);
+    z-index: 1;
+}
+
+/* Logout */
+
+.logoutContainer {
+    position: absolute;
+    right: 2em;
+    top: 2em;
+}
+
+.logoutContainer button {
+    font-size: 1em;
+    width: 5em;
+    padding: .5em;
+    border-radius: 25em;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    background-color: black;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.logoutContainer button:hover {
+    background-color: orange;
+    color: black;
+}
