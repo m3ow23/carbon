@@ -136,11 +136,7 @@ function addAccount() {
             .then((finalHash) => {
                 const encryptedAccountName = encryptData(accountName, finalHash + 'accountName')
                 const encryptedPassword = encryptData(password, finalHash + 'password')
-                let encryptedColor = encryptData(color, finalHash + 'color')
-
-                if (!validateColor(encryptedColor)) {
-                    encryptedColor = '#ffffff'
-                }
+                const encryptedColor = encryptData(color, finalHash + 'color')
 
                 update(ref(database, userUID + '/' + newAccountUID), {
                     accountName: encryptedAccountName,
