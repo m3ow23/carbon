@@ -1,7 +1,5 @@
 # Carbon
 
-**Author:** Nathanael Memis
-
 ### Introduction:
 Carbon is a password manager built for multi-device usage. Carbon is built using proper information security techniques which includes hashing, encryption, and authentication.
 	
