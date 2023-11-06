@@ -15,19 +15,15 @@ function encryptData(data, key) {
     }
     keySum = keySum % 127
 
+    let encryptedData = ''
     let keyCharactersIndex = 0
     for (const dataCharactersIndex in dataCharacters) {
-        dataCharacters[dataCharactersIndex] = (dataCharacters[dataCharactersIndex].charCodeAt(0) + keySum + keyCharacters[keyCharactersIndex]) % 127
+        encryptedData += String.fromCharCode((dataCharacters[dataCharactersIndex].charCodeAt(0) + keySum + keyCharacters[keyCharactersIndex]) % 127)
         keyCharactersIndex++
 
         if (keyCharactersIndex == keyCharacters.length) {
             keyCharactersIndex = 0
         }
-    }
-
-    let encryptedData = ''
-    for (const index in dataCharacters) {
-        encryptedData += String.fromCharCode(dataCharacters[index])
     }
 
     return encryptedData
@@ -46,19 +42,15 @@ function decryptData(encryptedData, key) {
     }
     keySum = keySum % 127
 
+    let decryptedData = ''
     let keyCharactersIndex = 0
     for (const dataCharactersIndex in dataCharacters) {
-        dataCharacters[dataCharactersIndex] = (dataCharacters[dataCharactersIndex].charCodeAt(0) - keySum - keyCharacters[keyCharactersIndex] + 254) % 127
+        decryptedData += String.fromCharCode((dataCharacters[dataCharactersIndex].charCodeAt(0) - keySum - keyCharacters[keyCharactersIndex] + 254) % 127)
         keyCharactersIndex++
 
         if (keyCharactersIndex == keyCharacters.length) {
             keyCharactersIndex = 0
         }
-    }
-
-    let decryptedData = ''
-    for (const index in dataCharacters) {
-        decryptedData += String.fromCharCode(dataCharacters[index])
     }
 
     return decryptedData.substring(key.length, decryptedData.length - key.length)
