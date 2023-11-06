@@ -2,7 +2,7 @@ import { getDatabase, ref, onValue, push, update, child, set, remove } from "htt
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
 import { initilizeFirebase } from "./firebase.js"
-import { validateInputs, rgbToHex, validateColor } from "./utils.js";
+import { validateInputs, rgbToHex } from "./utils.js";
 import { encryptData, decryptData, decryptAllData } from "./cryptography.js"
 import { getSingleHash } from "./hashing.js"
 
