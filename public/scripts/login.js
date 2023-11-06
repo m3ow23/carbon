@@ -19,7 +19,7 @@ document.getElementById("logInButton").addEventListener("click", () => {
     if (validateInputs(email, password, emailInput, passwordInput)) {
         signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-            getFullHash(password)
+            getFullHash(password + auth.currentUser.uid)
             .then((fullHash) => {
                 sessionStorage.setItem('carbonFullHash', fullHash);
                 window.location.href = 'dashboard.html'

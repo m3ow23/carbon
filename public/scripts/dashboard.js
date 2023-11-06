@@ -2,8 +2,8 @@ import { getDatabase, ref, onValue, push, update, child, set, remove } from "htt
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
 import { initilizeFirebase } from "./firebase.js"
-import { validateInputs, rgbToHex } from "./utils.js";
-import { encryptData, decryptAllData } from "./cryptography.js"
+import { validateInputs, rgbToHex, validateColor } from "./utils.js";
+import { encryptData, decryptData, decryptAllData } from "./cryptography.js"
 import { getSingleHash } from "./hashing.js"
 
 import { AccountCard } from "../components/accountCard.js"
@@ -27,6 +27,12 @@ const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
     if (!user) {
         window.location.href = 'index.html';
+    } else if (!fullHash) {
+        signOut(auth).then(() => {
+            window.location.href = 'index.html'
+        }).catch(() => {
+            alert('An Error Occured While Logging Out!')
+        });
     } else {
         userUID = user.uid
 
@@ -63,11 +69,18 @@ onAuthStateChanged(auth, (user) => {
 
                         // left click handler
                         element.addEventListener("click", () => {
-                            navigator.clipboard.writeText(account['password'])
+                            getSingleHash(fullHash + accountUID[index])
+                            .then((finalHash) => {
+                                navigator.clipboard.writeText(decryptData(account['password'], finalHash  + 'password'))
                                 .catch(error => {
                                     console.error('Unable to copy text to clipboard: ', error.message);
                                 });
-                            element.style.outline = '3px solid white'
+                                element.style.outline = '3px solid white'
+                            })
+                            .catch((error) => {
+                                alert('An error occured while getting single hash!')
+                                console.log(error.message)
+                            })
                         })
 
                         // right click handler
@@ -123,7 +136,11 @@ function addAccount() {
             .then((finalHash) => {
                 const encryptedAccountName = encryptData(accountName, finalHash + 'accountName')
                 const encryptedPassword = encryptData(password, finalHash + 'password')
-                const encryptedColor = encryptData(color, finalHash + 'color')
+                let encryptedColor = encryptData(color, finalHash + 'color')
+
+                if (!validateColor(encryptedColor)) {
+                    encryptedColor = '#ffffff'
+                }
 
                 update(ref(database, userUID + '/' + newAccountUID), {
                     accountName: encryptedAccountName,
@@ -234,8 +251,8 @@ editColorPicker.addEventListener('input', () => {
 // log out button listener
 document.getElementById("logoutButton").addEventListener("click", () => {
     signOut(auth).then(() => {
+        window.location.href = 'index.html'
         sessionStorage.removeItem('carbonFullHash')
-        window.location.href = ''
     }).catch(() => {
         alert('An Error Occured While Logging Out!')
     });

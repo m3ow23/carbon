@@ -41,4 +41,9 @@ function rgbToHex(rgb) {
     return `#${red}${green}${blue}`;
 }
 
-export { validateInputs, rgbToHex }
+function validateColor(color) {
+    const hexColorRegex = /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
+    return hexColorRegex.test(color);
+}
+
+export { validateInputs, rgbToHex, validateColor }

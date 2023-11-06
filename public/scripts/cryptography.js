@@ -72,7 +72,7 @@ async function decryptAllData(encryptedData, fullHash) {
                 return {
                     [key]: {
                         accountName: decryptData(encryptedData[key]['accountName'], finalHash + 'accountName'),
-                        password: decryptData(encryptedData[key]['password'], finalHash  + 'password'),
+                        password: encryptedData[key]['password'],
                         color: decryptData(encryptedData[key]['color'], finalHash  + 'color')
                     }
                 }
