@@ -30,6 +30,13 @@ main {
     color: orange;
 }
 
+@media (max-width: 425px) {
+    .title {
+        margin-right: auto;
+        margin-left: 2.5em;
+    }
+}
+
 
 /* Account Cards */
 
@@ -56,6 +63,16 @@ main {
 
 .card:hover {
     background-color: orange;
+}
+
+@media (max-width: 425px) {
+    .accountsContainer {
+        max-width: 90vw;
+    }
+
+    .card {
+        margin: .5em;
+    }
 }
 
 
@@ -199,17 +216,49 @@ main {
 
 .logoutContainer button {
     font-size: 1em;
-    width: 5em;
+    width: 7em;
     padding: .5em;
     border-radius: 25em;
     border: 0;
-    color: white;
     cursor: pointer;
-    background-color: black;
+    background-color: white;
     transition: background-color 0.2s, color 0.2s;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logoutContainer button:hover {
     background-color: orange;
     color: black;
+}
+
+.logoutContainer p {
+    margin: 0;
+}
+
+.logoutContainer img {
+    height: 1em;
+    width: 1em;
+    margin-right: .5em;
+}
+
+@media (max-width: 425px) {
+    .logoutContainer {
+        top: 5.25em;
+        right: 3em;
+    }
+
+    .logoutContainer button {
+        width: 3em;
+    }
+
+    .logoutContainer p {
+        display: none;
+    }
+
+    .logoutContainer img {
+        margin-right: 0;
+    }
 }

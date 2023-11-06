@@ -21,6 +21,7 @@ const fullHash = sessionStorage.getItem('carbonFullHash');
 let userUID = null
 let accounts = null
 let accountCurrentlyEditing = null
+let pressTimer = null // for touch listener on mobile devices
 
 // Check if the user is valid
 const auth = getAuth();
@@ -57,19 +58,19 @@ onAuthStateChanged(auth, (user) => {
                         addColorPicker.value = "#ffffff"
                     });
 
-                    let accountUID = []
+                    let accountUIDs = []
                     for (const key in accounts) {
-                        accountUID.push(key)
+                        accountUIDs.push(key)
                     }
 
                     const elements = document.querySelectorAll("#card")
                     elements.forEach((element, index) => {
-                        const account = accounts[accountUID[index]]
+                        const account = accounts[accountUIDs[index]]
                         const color = rgbToHex(element.style.backgroundColor)
 
                         // left click handler
                         element.addEventListener("click", () => {
-                            getSingleHash(fullHash + accountUID[index])
+                            getSingleHash(fullHash + accountUIDs[index])
                             .then((finalHash) => {
                                 navigator.clipboard.writeText(decryptData(account['password'], finalHash  + 'password'))
                                 .catch(error => {
@@ -87,19 +88,18 @@ onAuthStateChanged(auth, (user) => {
                         element.addEventListener('contextmenu', (event) => {
                             event.preventDefault()
 
-                            document.getElementById('editAccountModalContainer').style.visibility = 'visible'
-                            document.getElementById('editAccountModalBackgroundBlur').style.visibility = 'visible'
-                            document.getElementById('logoutContainer').style.visibility = 'hidden'
-
-                            accountCurrentlyEditing = accountUID[index]
-                            document.getElementById('accountUID').textContent = 'Editing ' + account['accountName']
-                            document.getElementById('editAccountName').value = account['accountName']
-                            document.getElementById('editPassword').value = account['password']
-
-                            const editColorPicker = document.getElementById('editColorPicker')
-                            editColorPicker.style.backgroundColor = color
-                            editColorPicker.value = color
+                            showEditModal(account, accountUIDs[index], color)
                         })
+
+                        // For touch devices (e.g., mobile)
+                        element.addEventListener("touchstart", () => {
+                            pressTimer = setTimeout(() => showEditModal(account, accountUIDs[index], color), 1000); // 1000ms (1 second) as an example for long press duration
+                        });
+                        
+                        // Clear the timeout if the touch is released before the long press duration
+                        element.addEventListener("touchend", () => {
+                            clearTimeout(pressTimer);
+                        });
 
                         // hover handler
                         element.addEventListener("mouseover", () => {
@@ -207,6 +207,21 @@ function deleteAccount() {
         .catch(() => {
             alert('An Error Occured While Deleting Account!')
         });
+}
+
+function showEditModal(account, accountUID, color) {
+    document.getElementById('editAccountModalContainer').style.visibility = 'visible'
+    document.getElementById('editAccountModalBackgroundBlur').style.visibility = 'visible'
+    document.getElementById('logoutContainer').style.visibility = 'hidden'
+
+    accountCurrentlyEditing = accountUID
+    document.getElementById('accountUID').textContent = 'Editing ' + account['accountName']
+    document.getElementById('editAccountName').value = account['accountName']
+    document.getElementById('editPassword').value = account['password']
+
+    const editColorPicker = document.getElementById('editColorPicker')
+    editColorPicker.style.backgroundColor = color
+    editColorPicker.value = color
 }
 
 // add modal listeners
